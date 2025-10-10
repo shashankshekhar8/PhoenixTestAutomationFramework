@@ -11,6 +11,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 import static io.restassured.RestAssured.*;
 
+import java.io.File;
 import java.io.IOException;
 
 public class CountAPITest {
@@ -35,7 +36,7 @@ public class CountAPITest {
 			.body("data.count",Matchers.everyItem(Matchers.greaterThanOrEqualTo(0)))
 			.body("data.label", Matchers.everyItem(Matchers.not(Matchers.blankOrNullString())))
 			.body("data.key", Matchers.containsInAnyOrder("pending_for_delivery","created_today","pending_fst_assignment"))
-			.body(matchesJsonSchemaInClasspath("response-schema/CountAPIResponseSchema-FD.json"));
+			.body(matchesJsonSchemaInClasspath("response-schema" + File.separator + "CountAPIResponseSchema-FD.json"));
 	}
 	
 	@Test

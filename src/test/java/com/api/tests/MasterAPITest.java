@@ -13,6 +13,7 @@ import static com.api.utils.ConfigManager.*;
 
 import static io.restassured.RestAssured.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
 
@@ -42,7 +43,7 @@ public class MasterAPITest {
 			.body("data.mst_model.size()", Matchers.greaterThan(0))
 			.body("data.mst_oem.id", Matchers.everyItem(Matchers.notNullValue()))
 			.body("data.mst_model.id", Matchers.everyItem(Matchers.notNullValue()))
-			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/MasterAPIResponseSchema.json"));
+			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema"+ File.separator +"MasterAPIResponseSchema.json"));
 	}
 	
 	@Test

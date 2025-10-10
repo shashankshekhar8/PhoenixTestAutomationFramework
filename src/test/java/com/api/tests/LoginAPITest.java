@@ -2,6 +2,7 @@ package com.api.tests;
 
 import static io.restassured.RestAssured.*;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.hamcrest.Matchers;
@@ -20,11 +21,29 @@ public class LoginAPITest {
 
 		UserCredentials userCredentials = new UserCredentials("iamfd", "password");
 
-		given().baseUri(getProperty("BASE_URI")).and().contentType(ContentType.JSON).and().accept(ContentType.JSON)
-				.and().body(userCredentials).log().uri().log().method().log().headers().log().body().when()
-				.post("login").then().log().all().statusCode(Matchers.equalTo(200)).and().time(Matchers.lessThan(3500L))
-				.and().body("message", Matchers.equalTo("Success")).and()
-				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema\\LoginResponseSchema.json"));
+		given()
+			.baseUri(getProperty("BASE_URI"))
+			.and()
+			.contentType(ContentType.JSON)
+			.and()
+			.accept(ContentType.JSON)
+			.and()
+			.body(userCredentials)
+			.log().uri()
+			.log().method()
+			.log().headers()
+			.log().body()
+		.when()
+			.post("login")
+		.then()
+			.log().all()
+			.statusCode(Matchers.equalTo(200))
+			.and().
+			time(Matchers.lessThan(3500L))
+			.and()
+			.body("message", Matchers.equalTo("Success"))
+			.and()
+			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema" + File.separator + "LoginResponseSchema.json"));
 	}
 
 }
