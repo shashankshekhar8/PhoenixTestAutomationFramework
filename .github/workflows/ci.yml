@@ -7,6 +7,22 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  schedule:
+    - cron: "30 18 * * *"
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Environment"
+        type: choice
+        options: [qa, dev, uat]
+        default: qa
+        required: true
+      suiteXmlFile:
+        description: "TestNG XML File"
+        type: choice
+        options: [testng.xml, smoke.xml, regression.xml]
+        default: testng.xml
+        required: true
 
 jobs:
   test:
@@ -24,7 +40,7 @@ jobs:
         cache: maven
         
     - name: Execute Test Automation Framework
-      run: mvn test -DsuiteXmlFile=testng.xml -Denv=qa
+      run: mvn test -DsuiteXmlFile="${{ github.event.inputs.suiteXmlFile }}" -Denv="${{ github.event.inputs.env }}"
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.6.2
