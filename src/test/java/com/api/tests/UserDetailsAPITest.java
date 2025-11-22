@@ -7,6 +7,7 @@ import static com.api.utils.AuthTokenProvider.*;
 
 import static com.api.constants.Role.*;
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -22,24 +23,12 @@ public class UserDetailsAPITest {
 	@Test
 	public void userDetailsAPITest() throws IOException {
 
-		Header header = new Header("Authorization", getToken(FD));
-
 		given()
-			.baseUri(ConfigManager.getProperty("BASE_URI"))
-			.and()
-			.accept(ContentType.JSON)
-			.and()
-			.header(header)
-			.log().uri()
-			.log().method()
-			.log().headers()
+			.spec(SpecUtil.requestSpecWithAuth(FD))
 		.when()
 			.get("userdetails")
 		.then()
-			.log().all()
-			.statusCode(Matchers.equalTo(200))
-			.and()
-			.time(Matchers.lessThan(5000L))
+			.spec(SpecUtil.responseSpec_OK())
 			.and()
 			.body("message", Matchers.equalTo("Success"))
 			.and()
