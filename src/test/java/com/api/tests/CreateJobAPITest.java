@@ -1,14 +1,12 @@
 package com.api.tests;
 
 import static io.restassured.RestAssured.given;
-
+import static com.api.utils.DateTimeUtil.*;
+import static org.hamcrest.Matchers.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
-
 import com.api.constants.Role;
 import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
@@ -16,7 +14,6 @@ import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.api.utils.SpecUtil;
-
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class CreateJobAPITest {
@@ -26,7 +23,7 @@ public class CreateJobAPITest {
 		
 		Customer customer = new Customer("Shashank", "Shekhar", "9742666189", "", "101shashank@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("106", "Shroff Soleno", "Baner Mahalunge road", "Near Orchid Hotel", "Mahalunge", "411045", "India", "Maharashtra");
-		CustomerProduct customerProduct = new CustomerProduct("2025-04-06T18:30:00.000Z", "59999999999999", "59999999999999", "59999999999999", "2025-04-06T18:30:00.000Z", 1 , 1);
+		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "49999999999999", "49999999999999", "49999999999999", getTimeWithDaysAgo(10), 1 , 1);
 		Problems problems = new Problems(1, "Battery Issue");
 		
 		List<Problems> problemsList = new ArrayList<Problems>();
