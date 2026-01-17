@@ -1,20 +1,13 @@
 package com.api.tests;
 
-import org.hamcrest.Matchers;
-import org.testng.annotations.Test;
-
-import com.api.constants.Role;
-import com.api.utils.SpecUtil;
-
-import static com.api.utils.AuthTokenProvider.*;
-import static com.api.utils.ConfigManager.*;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
-
-import static io.restassured.RestAssured.*;
-
+import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import java.io.File;
 import java.io.IOException;
+import org.hamcrest.Matchers;
+import org.testng.annotations.Test;
+import com.api.constants.Role;
+import com.api.utils.SpecUtil;
 
 public class CountAPITest {
 	

@@ -1,19 +1,12 @@
 package com.api.tests;
 
-import static io.restassured.RestAssured.*;
-
+import static io.restassured.RestAssured.given;
 import java.io.File;
 import java.io.IOException;
-
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
-
-import com.api.pojo.UserCredentials;
+import com.api.request.model.UserCredentials;
 import com.api.utils.SpecUtil;
-
-import static com.api.utils.ConfigManager.*;
-
-import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginAPITest {

@@ -1,12 +1,8 @@
 package com.api.utils;
 
 import java.io.IOException;
-
 import org.hamcrest.Matchers;
-
 import com.api.constants.Role;
-import com.api.pojo.UserCredentials;
-
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
