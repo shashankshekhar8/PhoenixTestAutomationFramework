@@ -7,7 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.testng.annotations.Test;
+
+import com.api.constants.Model;
+import com.api.constants.OEM;
+import com.api.constants.Platform;
+import com.api.constants.Problem;
+import com.api.constants.Product;
 import com.api.constants.Role;
+import com.api.constants.ServiceLocation;
+import com.api.constants.Warranty_Status;
 import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
@@ -22,14 +30,19 @@ public class CreateJobAPITest {
 	public void createJobAPITest() throws IOException {
 		
 		Customer customer = new Customer("Shashank", "Shekhar", "9742666189", "", "101shashank@gmail.com", "");
-		CustomerAddress customerAddress = new CustomerAddress("106", "Shroff Soleno", "Baner Mahalunge road", "Near Orchid Hotel", "Mahalunge", "411045", "India", "Maharashtra");
-		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "49999999999999", "49999999999999", "49999999999999", getTimeWithDaysAgo(10), 1 , 1);
-		Problems problems = new Problems(1, "Battery Issue");
-		
+		CustomerAddress customerAddress = new CustomerAddress("106", "Shroff Soleno", "Baner Mahalunge road",
+				"Near Orchid Hotel", "Mahalunge", "411045", "India", "Maharashtra");
+		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "29999999999999",
+				"29999999999999", "29999999999999", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(),
+				Model.NEXUS_2_BLUE.getCode());
+		Problems problems = new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "Battery Issue");
 		List<Problems> problemsList = new ArrayList<Problems>();
-		problemsList.add(problems); 
-		CreateJobPayload createJobPayload = new CreateJobPayload(0, 2, 1, 1, customer, customerAddress, customerProduct, problemsList); 
+		problemsList.add(problems);
 		
+		CreateJobPayload createJobPayload = new CreateJobPayload(ServiceLocation.SERVICE_LOCATION_A.getCode(),
+				Platform.FRONT_DESK.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer,
+				customerAddress, customerProduct, problemsList);
+
 		given()
 			.spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
 		.when()
