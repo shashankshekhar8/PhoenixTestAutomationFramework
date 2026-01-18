@@ -12,7 +12,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 public class MasterAPITest {
 	
 	
-	@Test
+	@Test(description = "Verify if the Master api is giving correct response", groups = {"api", "regression", "smoke"})
 	public void masterAPITest() throws IOException {
 		
 		given()
@@ -33,7 +33,7 @@ public class MasterAPITest {
 			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema"+ File.separator +"MasterAPIResponseSchema.json"));
 	}
 	
-	@Test
+	@Test(description = "Verify if the Master api is giving correct status code for invalid token", groups = {"api", "negative", "regression", "smoke"})
 	public void masterAPITestInvalidTokenTest() throws IOException {
 		given()
 			.spec(SpecUtil.requestSpec())
