@@ -1,26 +1,17 @@
 package com.api.tests;
 
-import org.hamcrest.Matchers;
-import org.testng.annotations.Test;
-
-import static com.api.utils.AuthTokenProvider.*;
-
-import static com.api.constants.Role.*;
-import com.api.utils.ConfigManager;
-import com.api.utils.SpecUtil;
-
-import io.restassured.http.ContentType;
-import io.restassured.http.Header;
-import io.restassured.module.jsv.JsonSchemaValidator;
-
-import static io.restassured.RestAssured.*;
-
+import static com.api.constants.Role.FD;
+import static io.restassured.RestAssured.given;
 import java.io.File;
 import java.io.IOException;
+import org.hamcrest.Matchers;
+import org.testng.annotations.Test;
+import com.api.utils.SpecUtil;
+import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class UserDetailsAPITest {
 
-	@Test
+	@Test(description = "Verify if the UserDetails API response is shown correctly", groups = {"api", "regression", "smoke"})
 	public void userDetailsAPITest() throws IOException {
 
 		given()

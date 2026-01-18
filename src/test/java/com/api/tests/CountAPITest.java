@@ -1,24 +1,17 @@
 package com.api.tests;
 
+import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import java.io.File;
+import java.io.IOException;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
-
 import com.api.constants.Role;
 import com.api.utils.SpecUtil;
 
-import static com.api.utils.AuthTokenProvider.*;
-import static com.api.utils.ConfigManager.*;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
-
-import static io.restassured.RestAssured.*;
-
-import java.io.File;
-import java.io.IOException;
-
 public class CountAPITest {
 	
-	@Test
+	@Test(description = "Verify if the Count api is giving correct response", groups = {"api", "regression", "smoke"})
 	public void verifyCountAPIResponse() throws IOException {
 		given()
 			.spec(SpecUtil.requestSpecWithAuth(Role.FD))
@@ -35,7 +28,7 @@ public class CountAPITest {
 			.body(matchesJsonSchemaInClasspath("response-schema" + File.separator + "CountAPIResponseSchema-FD.json"));
 	}
 	
-	@Test
+	@Test(description = "Verify if the Count api is giving correct status code for invalid token", groups = {"api", "negative", "regression", "smoke"})
 	public void verifyCountAPI_MissingAuthToken() throws IOException {
 		given()
 			.spec(SpecUtil.requestSpec())

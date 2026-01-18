@@ -1,27 +1,18 @@
 package com.api.tests;
 
-import org.hamcrest.Matchers;
-import org.testng.annotations.Test;
-
-import com.api.constants.Role;
-import com.api.utils.SpecUtil;
-
-import io.restassured.module.jsv.JsonSchemaValidator;
-
-import static com.api.utils.AuthTokenProvider.*;
-
-import static com.api.utils.ConfigManager.*;
-
-import static io.restassured.RestAssured.*;
-
+import static io.restassured.RestAssured.given;
 import java.io.File;
 import java.io.IOException;
-import java.util.regex.Matcher;
+import org.hamcrest.Matchers;
+import org.testng.annotations.Test;
+import com.api.constants.Role;
+import com.api.utils.SpecUtil;
+import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class MasterAPITest {
 	
 	
-	@Test
+	@Test(description = "Verify if the Master api is giving correct response", groups = {"api", "regression", "smoke"})
 	public void masterAPITest() throws IOException {
 		
 		given()
@@ -42,7 +33,7 @@ public class MasterAPITest {
 			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema"+ File.separator +"MasterAPIResponseSchema.json"));
 	}
 	
-	@Test
+	@Test(description = "Verify if the Master api is giving correct status code for invalid token", groups = {"api", "negative", "regression", "smoke"})
 	public void masterAPITestInvalidTokenTest() throws IOException {
 		given()
 			.spec(SpecUtil.requestSpec())
