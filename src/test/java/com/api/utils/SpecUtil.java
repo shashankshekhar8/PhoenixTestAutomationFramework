@@ -1,8 +1,9 @@
 package com.api.utils;
 
-import java.io.IOException;
 import org.hamcrest.Matchers;
+
 import com.api.constants.Role;
+
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -12,7 +13,7 @@ import io.restassured.specification.ResponseSpecification;
 
 public class SpecUtil {
 	
-	public static RequestSpecification requestSpec() throws IOException {
+	public static RequestSpecification requestSpec() {
 		
 		RequestSpecification requestSpecification = new RequestSpecBuilder()
 		.setBaseUri(ConfigManager.getProperty("BASE_URI"))
@@ -27,7 +28,7 @@ public class SpecUtil {
 		return requestSpecification;
 	}
 	
-	public static RequestSpecification requestSpec(Object payload) throws IOException {
+	public static RequestSpecification requestSpec(Object payload) {
 		
 		RequestSpecification requestSpecification = new RequestSpecBuilder()
 		.setBaseUri(ConfigManager.getProperty("BASE_URI"))
@@ -43,7 +44,7 @@ public class SpecUtil {
 		return requestSpecification;
 	}
 
-	public static RequestSpecification requestSpecWithAuth(Role role) throws IOException {
+	public static RequestSpecification requestSpecWithAuth(Role role) {
 		RequestSpecification requestSpecification = new RequestSpecBuilder()
 				.setBaseUri(ConfigManager.getProperty("BASE_URI"))
 				.setContentType(ContentType.JSON)
@@ -58,7 +59,7 @@ public class SpecUtil {
 				return requestSpecification;
 	}
 	
-	public static RequestSpecification requestSpecWithAuth(Role role, Object payload) throws IOException {
+	public static RequestSpecification requestSpecWithAuth(Role role, Object payload) {
 		RequestSpecification requestSpecification = new  RequestSpecBuilder()
 		.setBaseUri(ConfigManager.getProperty("BASE_URI"))
 		.setContentType(ContentType.JSON)

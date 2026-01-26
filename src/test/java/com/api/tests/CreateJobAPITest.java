@@ -1,9 +1,10 @@
 package com.api.tests;
 
+import static com.api.utils.DateTimeUtil.getTimeWithDaysAgo;
 import static io.restassured.RestAssured.given;
-import static com.api.utils.DateTimeUtil.*;
-import static org.hamcrest.Matchers.*;
-import java.io.IOException;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.startsWith;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.api.utils.SpecUtil;
+
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class CreateJobAPITest {
@@ -48,7 +50,7 @@ public class CreateJobAPITest {
 	}
 
 	@Test(description = "Verify if create job api is able to create InWarranty job", groups = {"api", "regression", "smoke"})
-	public void createJobAPITest() throws IOException {
+	public void createJobAPITest() {
 		
 		given()
 			.spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))

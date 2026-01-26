@@ -1,19 +1,22 @@
 package com.api.tests;
 
 import static io.restassured.RestAssured.given;
+
 import java.io.File;
-import java.io.IOException;
+
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
+
 import com.api.constants.Role;
 import com.api.utils.SpecUtil;
+
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class MasterAPITest {
 	
 	
 	@Test(description = "Verify if the Master api is giving correct response", groups = {"api", "regression", "smoke"})
-	public void masterAPITest() throws IOException {
+	public void masterAPITest() {
 		
 		given()
 			.spec(SpecUtil.requestSpecWithAuth(Role.FD))
@@ -34,7 +37,7 @@ public class MasterAPITest {
 	}
 	
 	@Test(description = "Verify if the Master api is giving correct status code for invalid token", groups = {"api", "negative", "regression", "smoke"})
-	public void masterAPITestInvalidTokenTest() throws IOException {
+	public void masterAPITestInvalidTokenTest() {
 		given()
 			.spec(SpecUtil.requestSpec())
 		.when()
