@@ -2,17 +2,19 @@ package com.api.tests;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 import java.io.File;
-import java.io.IOException;
+
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
+
 import com.api.constants.Role;
 import com.api.utils.SpecUtil;
 
 public class CountAPITest {
 	
 	@Test(description = "Verify if the Count api is giving correct response", groups = {"api", "regression", "smoke"})
-	public void verifyCountAPIResponse() throws IOException {
+	public void verifyCountAPIResponse() {
 		given()
 			.spec(SpecUtil.requestSpecWithAuth(Role.FD))
 		.when()
@@ -29,7 +31,7 @@ public class CountAPITest {
 	}
 	
 	@Test(description = "Verify if the Count api is giving correct status code for invalid token", groups = {"api", "negative", "regression", "smoke"})
-	public void verifyCountAPI_MissingAuthToken() throws IOException {
+	public void verifyCountAPI_MissingAuthToken() {
 		given()
 			.spec(SpecUtil.requestSpec())
 		.when()

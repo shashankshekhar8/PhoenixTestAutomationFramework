@@ -1,13 +1,16 @@
 package com.api.tests;
 
 import static io.restassured.RestAssured.given;
+
 import java.io.File;
-import java.io.IOException;
+
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import com.api.request.model.UserCredentials;
 import com.api.utils.SpecUtil;
+
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginAPITest {
@@ -20,7 +23,7 @@ public class LoginAPITest {
 	}
 
 	@Test(description = "Verify if login api is working for FD user", groups = {"api", "regression", "smoke"})
-	public void loginAPITest() throws IOException {
+	public void loginAPITest() {
 
 		given()
 			.spec(SpecUtil.requestSpec(userCredentials))

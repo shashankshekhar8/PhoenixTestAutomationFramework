@@ -1,11 +1,15 @@
 package com.api.utils;
 
-import static io.restassured.RestAssured.*;
-import java.io.IOException;
-import static org.hamcrest.Matchers.*;
-import static com.api.constants.Role.*;
+import static com.api.constants.Role.ENG;
+import static com.api.constants.Role.FD;
+import static com.api.constants.Role.QC;
+import static com.api.constants.Role.SUP;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+
 import com.api.constants.Role;
 import com.api.request.model.UserCredentials;
+
 import io.restassured.http.ContentType;
 
 public class AuthTokenProvider {
@@ -13,7 +17,7 @@ public class AuthTokenProvider {
 	private AuthTokenProvider() {
 	}
 
-	public static String getToken(Role role) throws IOException {
+	public static String getToken(Role role) {
 
 		UserCredentials userCredentials = null;
 
