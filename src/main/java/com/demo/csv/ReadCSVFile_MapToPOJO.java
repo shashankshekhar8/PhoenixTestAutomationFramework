@@ -17,12 +17,12 @@ public class ReadCSVFile_MapToPOJO {
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("testData/LoginCreds.csv");
 		InputStreamReader isr = new InputStreamReader(is);
 		CSVReader csvReader = new CSVReader(isr);
-		CsvToBean<UserPOJO> csvToBean = new CsvToBeanBuilder<UserPOJO>(csvReader)
-							.withType(UserPOJO.class)
+		CsvToBean<UserBean> csvToBean = new CsvToBeanBuilder<UserBean>(csvReader)
+							.withType(UserBean.class)
 							.withIgnoreEmptyLine(true)
 							.build();
-		List<UserPOJO> userList = csvToBean.parse();
-		System.out.println(userList.get(0).getUsername());
+		List<UserBean> userList = csvToBean.parse();
+		System.out.println(userList);
 	}
 
 }
